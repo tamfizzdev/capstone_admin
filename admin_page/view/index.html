@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Trang Admin</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.0-alpha.1/tailwind.min.css"
+      integrity="sha512-NUFPUFpyuQGekaUg+cNAh8qN0bwd04x5tBgYRT9iNdrUV38gVu4QU0jlx1CSBKPOnp5invOm0HPW4+cXqjBeAQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <!-- my css -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="stylesheet" href="../css/index.css" />
+  </head>
+  <body>
+    <header class="top-0 left-0 w-full">
+      <div class="container flex justify-between h-20 items-center">
+        <span class="logo text-3xl font-medium"> CyberPhone </span>
+        <nav class="space-x-5">
+          <a class="active" href="#">Home</a>
+          <a href="#">About</a>
+          <a href="#">Shop</a>
+          <a href="#">Blog</a>
+          <a href="#">Contact</a>
+        </nav>
+      </div>
+    </header>
+    <!-- position tailwind -->
+    <section class="banner">
+      <div class="container h-screen flex pt-20">
+        <div class="w-1/2 h-full flex flex-col justify-center space-y-10">
+          <h2 class="text-5xl font-bold">CyberPhone</h2>
+          <h3 class="text-xl">Best Smartphone of 2021!</h3>
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione
+            laudantium exercitationem hic? Quisquam porro consequatur obcaecati
+            ut dolore repellendus, delectus at voluptate nemo officia, numquam
+            accusantium, cum labore ab rerum?
+          </p>
+          <div>
+            <button class="infor">More Infor</button>
+            <button class="shop">Shop</button>
+          </div>
+        </div>
+        <div class="w-1/2 h-full p-10">
+          <img
+            src="../image-20230704T025428Z-001/image/product-header2.png"
+            alt=""
+            class="w-full"
+          />
+        </div>
+      </div>
+    </section>
+
+    <div id="spinner">
+      <div class="spinner-border text-warning" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+    <div class="container mt-10">
+      <ul class="nav nav-tabs mt-30" role="tablist">
+        <li class="nav-item">
+          <a
+            class="nav-link active"
+            href="#DanhSachSP"
+            role="tab"
+            data-toggle="tab"
+            >Danh sách sản phẩm</a
+          >
+        </li>
+      </ul>
+      <br />
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <!--Danh sách sản phẩm -->
+        <div role="tabpanel" class="tab-pane in active" id="DanhSachSP">
+          <div class="row">
+            <div class="col-md-8">
+              <!-- BEGIN BUTTOM THÊM MỚI -->
+              <button
+                id="btnThemSP"
+                class="btn btn-success"
+                data-toggle="modal"
+                data-target="#myModal"
+              >
+                <i class="fa fa-plus mr-1"></i>
+                Thêm Mới
+              </button>
+              <!-- END BUTTON THÊM MỚI -->
+            </div>
+            <!-- Button sắp xếp -->
+            <div class="dropdown col-md-4">
+              <button
+                class="btn btn-primary dropdown-toggle"
+                type="button"
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                Xắp xếp sản phẩm theo giá
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div onclick="giaCaoDenThap()" class="dropdown-item">
+                  Cao tới thấp
+                </div>
+                <div onclick="giaThapDenCao()" class="dropdown-item">
+                  Thấp tới cao
+                </div>
+              </div>
+            </div>
+            <!-- end button sap xep -->
+            <div class="col-md-4">
+              <!-- BEGIN TÌM KIẾM -->
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="search"
+                  placeholder="Tìm Kiếm Sản Phẩm"
+                  aria-label="Recipient's username"
+                  aria-describedby="basic-addon2"
+                  oninput="timKiemSP()"
+                />
+              </div>
+              <!-- END TÌM KIẾM -->
+            </div>
+          </div>
+          <div class="clear-fix"></div>
+          <div class="tblSanPham" id="tblSanPham">
+            <!-- BEGIN TABLE SẢN PHẨM -->
+            <table class="table table-bordered">
+              <thead>
+                <th>STT</th>
+                <th>Tên Sản Phẩm</th>
+                <th>Giá</th>
+                <th>Hình Ảnh</th>
+                <th>Mô Tả</th>
+                <th>Action</th>
+              </thead>
+              <tbody id="tblDanhSachSP"></tbody>
+            </table>
+            <!-- END TABLE SẢN PHẨM -->
+          </div>
+          <br />
+        </div>
+        <!-- Kết thúc danh sách sản phẩm -->
+      </div>
+
+      <!--KetThuc Tabmenu-->
+
+      <!-- The Modal -->
+      <div class="modal fade" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Modal Heading</h4>
+              <button type="button" class="close" data-dismiss="modal">
+                &times;
+              </button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+              <div class="form-group">
+                <label>Tên Sản Phẩm</label>
+                <input
+                  id="TenSP"
+                  class="form-control"
+                  placeholder="Nhập vào tên sản phẩm"
+                />
+              </div>
+              <div class="form-group">
+                <label>Giá</label>
+                <input
+                  id="GiaSP"
+                  class="form-control"
+                  placeholder="Nhập vào giá"
+                />
+              </div>
+              <div class="form-group">
+                <label>Hình Ảnh</label>
+                <input
+                  id="HinhSP"
+                  class="form-control"
+                  placeholder="Nhập vào hình sản phẩm"
+                />
+              </div>
+              <div class="form-group">
+                <label>Mô tả</label>
+                <input
+                  id="moTaSP"
+                  class="form-control"
+                  placeholder="Nhập mô tả"
+                />
+              </div>
+            </div>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+              <button class="btn btn-success" onclick="themSP()">Thêm</button>
+              <button class="btn btn-success" onclick="capNhatSP()">
+                Cập nhật
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="container"></div>
+    <style>
+      #container {
+        min-width: 310px;
+        max-width: 800px;
+        height: 400px;
+        margin: 0 auto;
+      }
+    </style>
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.min.js"
+      integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/series-label.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- axious -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"
+      integrity="sha512-uMtXmF28A2Ab/JJO2t/vYhlaa/3ahUOgj1Zf27M5rOo8/+fcTUVH0/E0ll68njmjrLqOBjXM3V9NiPFL5ywWPQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <!-- service -->
+    <script src="../services/productServ.js"></script>
+    <!-- controller -->
+    <script src="../controllers/controller.js"></script>
+    <!-- main -->
+    <script src="../controllers/main.js"></script>
+  </body>
+</html>
+
+<!-- sass -->
+<!-- tailwind css intelligence -->
